@@ -16,11 +16,11 @@ public class GM : MonoBehaviour {
 	void Update () {
         if (isPlayerOneTurn)
         {
-            darken.transform.position = new Vector3(4.5f, 0, -1);
+            darken.transform.position = new Vector3(4.5f, 0, 0);
         }
         else
         {
-            darken.transform.position = new Vector3(-4.5f, 0, -1);
+            darken.transform.position = new Vector3(-4.5f, 0, 0);
         }
 	}
 
