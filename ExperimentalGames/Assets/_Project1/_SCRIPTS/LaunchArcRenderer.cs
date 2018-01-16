@@ -34,7 +34,7 @@ public class LaunchArcRenderer : MonoBehaviour {
 	}
 
 	//Populates the lineRenderer with the appropiate settings
-	void RenderArc() {
+	public void RenderArc() {
 		lr.SetVertexCount (resolution + 1);
 		lr.SetPositions (CalcArcArray ());
 	}
