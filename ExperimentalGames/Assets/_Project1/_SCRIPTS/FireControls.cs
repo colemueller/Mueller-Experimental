@@ -14,6 +14,8 @@ public class FireControls : MonoBehaviour {
     private bool canFire_2 = false;
 
     public GameObject darken;
+    public bool DoAnything = true;
+    bool isPlayerOne = true;
 
     // Use this for initialization
     void Start () {
@@ -23,76 +25,96 @@ public class FireControls : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (canFire_1)
+        if (DoAnything)
         {
-            
-            //Charge velocity
-            if (Input.GetKey(KeyCode.Space))
+            if (canFire_1)
             {
-                arcRender_1.v += 0.05f;
-            }
-            else
-            {
-                //Increase Angle
-                if (Input.GetKey(KeyCode.A))
+
+                //Charge velocity
+                if (Input.GetKey(KeyCode.Space))
                 {
-                    arcRender_1.angle += 0.3f;
+                    arcRender_1.v += 0.05f;
                 }
-                //Decrease Angle
-                else if (Input.GetKey(KeyCode.D))
+                else
                 {
-                    arcRender_1.angle -= 0.3f;
+                    //Increase Angle
+                    if (Input.GetKey(KeyCode.A))
+                    {
+                        arcRender_1.angle += 0.3f;
+                    }
+                    //Decrease Angle
+                    else if (Input.GetKey(KeyCode.D))
+                    {
+                        arcRender_1.angle -= 0.3f;
+                    }
                 }
-            }
 
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                canFire_1 = false;
-                StartCoroutine(Fire(1));
-            }
-
-
-            arcRender_1.RenderArc();
-        }
-        if (canFire_2)
-        {
-
-            //Charge velocity
-            if (Input.GetKey(KeyCode.Space))
-            {
-                arcRender_2.v += 0.05f;
-            }
-            else
-            {
-                //Increase Angle
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKeyUp(KeyCode.Space))
                 {
-                    arcRender_2.angle += 0.3f;
+                    canFire_1 = false;
+                    Fire(1);
+                    DoAnything = false;
                 }
-                //Decrease Angle
-                else if (Input.GetKey(KeyCode.D))
-                {
-                    arcRender_2.angle -= 0.3f;
-                }
-            }
 
-            if (Input.GetKeyUp(KeyCode.Space))
+
+                arcRender_1.RenderArc();
+            }
+            if (canFire_2)
             {
-                canFire_2 = false;
-                StartCoroutine(Fire(2));
+
+                //Charge velocity
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    arcRender_2.v += 0.05f;
+                }
+                else
+                {
+                    //Increase Angle
+                    if (Input.GetKey(KeyCode.A))
+                    {
+                        arcRender_2.angle += 0.3f;
+                    }
+                    //Decrease Angle
+                    else if (Input.GetKey(KeyCode.D))
+                    {
+                        arcRender_2.angle -= 0.3f;
+                    }
+                }
+
+                if (Input.GetKeyUp(KeyCode.Space))
+                {
+                    canFire_2 = false;
+                    Fire(2);
+                    DoAnything = false;
+                }
+
+
+                arcRender_2.RenderArc();
             }
-
-
-            arcRender_2.RenderArc();
         }
     }
 
-    IEnumerator Fire(int playerNum)
+    void Fire(int playerNum)
     {
-        yield return new WaitForSeconds(1f);
+        
 
         if (playerNum == 1)
+        {
+            arcRender_1.Fire();
+
+            
+        }
+        else
+        {
+            arcRender_2.Fire();
+
+            
+        }
+    }
+
+    public void SwitchPlayer()
+    {
+        if (isPlayerOne)
         {
             darken.transform.position = new Vector3(-4.5f, 0, 0);
             canFire_2 = true;
@@ -108,5 +130,8 @@ public class FireControls : MonoBehaviour {
             catapult_1.SetActive(true);
             arcRender_1.v = 5f;
         }
+
+        isPlayerOne = !isPlayerOne;
+        DoAnything = true;
     }
 }

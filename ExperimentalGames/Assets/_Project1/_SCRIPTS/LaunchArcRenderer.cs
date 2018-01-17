@@ -14,12 +14,23 @@ public class LaunchArcRenderer : MonoBehaviour {
 
 	public float g;  //Force of gravity on the y axis
 
-	float radianAngle;  //For converting degrees to radians
+    public Transform projectile;
+    public float projectileSpeed = 1;
+    float step;
+    bool doMove = false;
+    Vector3[] temp;
+    int i = 1;
+
+    public FireControls fireScript;
+
+
+    float radianAngle;  //For converting degrees to radians
 
 	void Awake(){
 		lr = GetComponent<LineRenderer> ();
 		g = Mathf.Abs (Physics2D.gravity.y);
-	}
+        projectile.gameObject.SetActive(false);
+    }
 
 	void OnValidate() {
 		//check that lr is not null and that the game is playing
@@ -62,6 +73,42 @@ public class LaunchArcRenderer : MonoBehaviour {
 
 		return new Vector3 (x, y);
 	}
-	
+
+    public void Fire()
+    {
+        temp = CalcArcArray();
+        projectile.localPosition = temp[0];
+        doMove = true;
+        projectile.gameObject.SetActive(true);
+
+    }
+
+    void Update()
+    {
+        step = projectileSpeed * Time.deltaTime;
+        if (doMove)
+        {
+            if (i <= resolution)
+            {
+                if (projectile.localPosition != temp[i])
+                {
+                    projectile.localPosition = Vector3.MoveTowards(projectile.localPosition, temp[i], step);
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            else
+            {
+                doMove = false;
+                i = 1;
+                projectile.gameObject.SetActive(false);
+                fireScript.SwitchPlayer();
+            }
+        }
+    }
+
+
 
 }
