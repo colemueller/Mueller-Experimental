@@ -38,12 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: projectile
-    uniqueID: 982373387
+  - name: background
+    uniqueID: 68347445
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: catapult
+  - name: characters
     uniqueID: 731575633
+    locked: 0
+  - name: blackout
+    uniqueID: 3374134613
+    locked: 0
+  - name: projectile
+    uniqueID: 982373387
     locked: 0

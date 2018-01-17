@@ -6,10 +6,11 @@ public class GM : MonoBehaviour {
 
     public bool isPlayerOneTurn = true;
     public GameObject darken;
+	public GameObject p2LaunchSource;
 
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame

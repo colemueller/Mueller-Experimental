@@ -117,6 +117,7 @@ public class FireControls : MonoBehaviour {
         if (isPlayerOne)
         {
             darken.transform.position = new Vector3(-4.5f, 0, 0);
+			arcRender_1.angle = 45f;
             canFire_2 = true;
             catapult_2.SetActive(true);
             catapult_1.SetActive(false);
@@ -125,6 +126,7 @@ public class FireControls : MonoBehaviour {
         else
         {
             darken.transform.position = new Vector3(4.5f, 0, 0);
+			arcRender_2.angle = 45f;
             canFire_1 = true;
             catapult_2.SetActive(false);
             catapult_1.SetActive(true);

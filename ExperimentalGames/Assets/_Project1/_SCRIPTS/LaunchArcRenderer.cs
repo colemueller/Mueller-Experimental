@@ -85,9 +85,10 @@ public class LaunchArcRenderer : MonoBehaviour {
 
     void Update()
     {
-        step = projectileSpeed * Time.deltaTime;
         if (doMove)
         {
+			step = projectileSpeed * Time.deltaTime;
+
             if (i <= resolution)
             {
                 if (projectile.localPosition != temp[i])
