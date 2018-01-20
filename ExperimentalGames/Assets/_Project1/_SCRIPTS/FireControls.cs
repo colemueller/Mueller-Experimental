@@ -16,9 +16,14 @@ public class FireControls : MonoBehaviour {
     private bool canFire_1 = true;
     private bool canFire_2 = false;
 
+	public bool moveTo_1 = true;
+	public bool moveTo_2 = false;
+
     public GameObject darken;
     public bool DoAnything = true;
     bool isPlayerOne = true;
+
+	public LaunchArcRenderer arcRenderScript;
 
     // Use this for initialization
     void Start () {
@@ -100,6 +105,21 @@ public class FireControls : MonoBehaviour {
                 arcRender_2.RenderArc();
             }
         }
+
+		if (moveTo_1 == true) {
+			Vector3 moveTo = new Vector3 (-9, 0, -10);
+			mainCam.transform.position = Vector3.MoveTowards (mainCam.transform.position, moveTo, Time.deltaTime * camSpeed);
+			if (mainCam.transform.position.x <= moveTo.x) {
+				moveTo_1 = false;
+			}
+		} 
+		else if (moveTo_2 == true) {
+			Vector3 moveTo = new Vector3 (9, 0, -10);
+			mainCam.transform.position = Vector3.MoveTowards (mainCam.transform.position, moveTo, Time.deltaTime * camSpeed);
+			if (mainCam.transform.position.x >= moveTo.x) {
+				moveTo_2 = false;
+			}
+		}
     }
 
     void Fire(int playerNum)
@@ -108,13 +128,13 @@ public class FireControls : MonoBehaviour {
 
         if (playerNum == 1)
         {
-            arcRender_1.Fire();
+			arcRender_1.Fire(playerNum);
 
             
         }
         else
         {
-            arcRender_2.Fire();
+            arcRender_2.Fire(playerNum);
 
             
         }
@@ -124,11 +144,7 @@ public class FireControls : MonoBehaviour {
     {
         if (isPlayerOne)
         {
-			Vector3 moveTo = new Vector3 (9, 0, -10);
-			//while (mainCam.transform.position != moveTo) {
-				mainCam.transform.Translate (new Vector3(Time.deltaTime, 0, -10));
-			}
-
+			moveTo_2 = true;
 			//darken.transform.position = new Vector3(-4.5f, 0, 0);
 			arcRender_1.angle = 45f;
             canFire_2 = true;
@@ -138,11 +154,7 @@ public class FireControls : MonoBehaviour {
         }
         else
         {
-			Vector3 moveTo = new Vector3 (-9, 0, -10);
-			//while (mainCam.transform.position != moveTo) {
-				mainCam.transform.Translate (new Vector3(Time.deltaTime, 0, -10));
-			}
-
+			moveTo_1 = true;
 			//darken.transform.position = new Vector3(4.5f, 0, 0);
 			arcRender_2.angle = 45f;
             canFire_1 = true;

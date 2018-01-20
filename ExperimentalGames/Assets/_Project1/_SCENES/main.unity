@@ -367,12 +367,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1290393286486922, guid: 7b66198c3629dad4da2e28ed5555ce82, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114958806373286980, guid: 7b66198c3629dad4da2e28ed5555ce82,
         type: 2}
       propertyPath: projectileSpeed
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 114958806373286980, guid: 7b66198c3629dad4da2e28ed5555ce82,
         type: 2}
@@ -413,7 +413,7 @@ Prefab:
     - target: {fileID: 120463620561657946, guid: 7b66198c3629dad4da2e28ed5555ce82,
         type: 2}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
-      value: 0.6886139
+      value: 0.49061584
       objectReference: {fileID: 0}
     - target: {fileID: 120463620561657946, guid: 7b66198c3629dad4da2e28ed5555ce82,
         type: 2}
@@ -438,7 +438,7 @@ Prefab:
     - target: {fileID: 120463620561657946, guid: 7b66198c3629dad4da2e28ed5555ce82,
         type: 2}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].time
-      value: 0.69519717
+      value: 0.49384218
       objectReference: {fileID: 0}
     - target: {fileID: 120463620561657946, guid: 7b66198c3629dad4da2e28ed5555ce82,
         type: 2}
@@ -529,9 +529,12 @@ MonoBehaviour:
   catapult_1: {fileID: 300288776}
   catapult_2: {fileID: 586042473}
   mainCam: {fileID: 794206193}
-  camSpeed: 0.005
+  camSpeed: 10
+  moveTo_1: 1
+  moveTo_2: 0
   darken: {fileID: 1049477364}
   DoAnything: 1
+  arcRenderScript: {fileID: 0}
 --- !u!1 &586042473 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1290393286486922, guid: 7b66198c3629dad4da2e28ed5555ce82,
@@ -1010,6 +1013,51 @@ Prefab:
       propertyPath: fireScript
       value: 
       objectReference: {fileID: 473983011}
+    - target: {fileID: 114958806373286980, guid: 7b66198c3629dad4da2e28ed5555ce82,
+        type: 2}
+      propertyPath: projectileSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 120463620561657946, guid: 7b66198c3629dad4da2e28ed5555ce82,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
+      value: 0.49526978
+      objectReference: {fileID: 0}
+    - target: {fileID: 120463620561657946, guid: 7b66198c3629dad4da2e28ed5555ce82,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].time
+      value: 0.5009308
+      objectReference: {fileID: 0}
+    - target: {fileID: 120463620561657946, guid: 7b66198c3629dad4da2e28ed5555ce82,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 120463620561657946, guid: 7b66198c3629dad4da2e28ed5555ce82,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 120463620561657946, guid: 7b66198c3629dad4da2e28ed5555ce82,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].inSlope
+      value: 0.10218443
+      objectReference: {fileID: 0}
+    - target: {fileID: 120463620561657946, guid: 7b66198c3629dad4da2e28ed5555ce82,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].outSlope
+      value: 16.226072
+      objectReference: {fileID: 0}
+    - target: {fileID: 120463620561657946, guid: 7b66198c3629dad4da2e28ed5555ce82,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 120463620561657946, guid: 7b66198c3629dad4da2e28ed5555ce82,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].outSlope
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7b66198c3629dad4da2e28ed5555ce82, type: 2}
   m_IsPrefabParent: 0

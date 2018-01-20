@@ -74,9 +74,15 @@ public class LaunchArcRenderer : MonoBehaviour {
 		return new Vector3 (x, y);
 	}
 
-    public void Fire()
+	public void Fire(int player)
     {
-        temp = CalcArcArray();
+		if (player == 1) {
+			fireScript.moveTo_2 = true;
+		} 
+		else {
+			fireScript.moveTo_1 = true;
+		}
+		temp = CalcArcArray();
         projectile.localPosition = temp[0];
         doMove = true;
         projectile.gameObject.SetActive(true);
