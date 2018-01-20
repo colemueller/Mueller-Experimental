@@ -7,6 +7,11 @@ public class GM : MonoBehaviour {
     public bool isPlayerOneTurn = true;
     public GameObject darken;
 	public GameObject p2LaunchSource;
+	public Camera mainCam;
+	public float camSpeed;
+
+	public GameObject p1;
+	public GameObject p2;
 
 	// Use this for initialization
 	void Start () {
@@ -17,11 +22,13 @@ public class GM : MonoBehaviour {
 	void Update () {
         if (isPlayerOneTurn)
         {
-            darken.transform.position = new Vector3(4.5f, 0, 0);
+			mainCam.transform.localPosition = Vector3.MoveTowards (mainCam.transform.localPosition, new Vector3(-9, 0, -10), camSpeed);
+			//darken.transform.position = new Vector3(4.5f, 0, 0);
         }
         else
         {
-            darken.transform.position = new Vector3(-4.5f, 0, 0);
+			mainCam.transform.localPosition = Vector3.MoveTowards (mainCam.transform.localPosition, new Vector3(9, 0, -10), camSpeed);
+            //darken.transform.position = new Vector3(-4.5f, 0, 0);
         }
 	}
 

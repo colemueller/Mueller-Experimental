@@ -10,6 +10,9 @@ public class FireControls : MonoBehaviour {
     public GameObject catapult_1;
     public GameObject catapult_2;
 
+	public Camera mainCam;
+	public float camSpeed;
+
     private bool canFire_1 = true;
     private bool canFire_2 = false;
 
@@ -21,6 +24,11 @@ public class FireControls : MonoBehaviour {
     void Start () {
         arcRender_1 = catapult_1.transform.GetChild(1).GetChild(0).GetComponent<LaunchArcRenderer>();
         arcRender_2 = catapult_2.transform.GetChild(1).GetChild(0).GetComponent<LaunchArcRenderer>();
+
+		Vector3 moveTo = new Vector3 (-9, 0, -10);
+		while (mainCam.transform.localPosition != moveTo) {
+			mainCam.transform.localPosition = Vector3.MoveTowards (mainCam.transform.localPosition, moveTo, camSpeed * Time.deltaTime);
+		}
     }
 	
 	// Update is called once per frame
@@ -116,7 +124,12 @@ public class FireControls : MonoBehaviour {
     {
         if (isPlayerOne)
         {
-            darken.transform.position = new Vector3(-4.5f, 0, 0);
+			Vector3 moveTo = new Vector3 (9, 0, -10);
+			//while (mainCam.transform.position != moveTo) {
+				mainCam.transform.Translate (new Vector3(Time.deltaTime, 0, -10));
+			}
+
+			//darken.transform.position = new Vector3(-4.5f, 0, 0);
 			arcRender_1.angle = 45f;
             canFire_2 = true;
             catapult_2.SetActive(true);
@@ -125,7 +138,12 @@ public class FireControls : MonoBehaviour {
         }
         else
         {
-            darken.transform.position = new Vector3(4.5f, 0, 0);
+			Vector3 moveTo = new Vector3 (-9, 0, -10);
+			//while (mainCam.transform.position != moveTo) {
+				mainCam.transform.Translate (new Vector3(Time.deltaTime, 0, -10));
+			}
+
+			//darken.transform.position = new Vector3(4.5f, 0, 0);
 			arcRender_2.angle = 45f;
             canFire_1 = true;
             catapult_2.SetActive(false);
