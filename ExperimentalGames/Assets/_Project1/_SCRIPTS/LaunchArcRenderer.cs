@@ -23,6 +23,9 @@ public class LaunchArcRenderer : MonoBehaviour {
 
     public FireControls fireScript;
 
+	float xOffset;
+	float newX;
+	float yOffset;
 
     float radianAngle;  //For converting degrees to radians
 
@@ -76,15 +79,11 @@ public class LaunchArcRenderer : MonoBehaviour {
 
 	public void Fire(int player)
     {
-		if (player == 1) {
-			fireScript.moveTo_2 = true;
-		} 
-		else {
-			fireScript.moveTo_1 = true;
-		}
 		temp = CalcArcArray();
         projectile.localPosition = temp[0];
         doMove = true;
+		xOffset = projectile.position.x - fireScript.mainCam.transform.position.x;
+		yOffset = projectile.position.y - fireScript.mainCam.transform.position.y;
         projectile.gameObject.SetActive(true);
 
     }
@@ -100,7 +99,15 @@ public class LaunchArcRenderer : MonoBehaviour {
                 if (projectile.localPosition != temp[i])
                 {
                     projectile.localPosition = Vector3.MoveTowards(projectile.localPosition, temp[i], step);
-                }
+
+					if (projectile.position.x - xOffset >= -9f && projectile.position.x - xOffset <= 9f) {
+						newX = projectile.position.x - xOffset;
+						fireScript.mainCam.transform.position = new Vector3 (newX, fireScript.mainCam.transform.position.y, fireScript.mainCam.transform.position.z);
+					}
+					if (projectile.position.y - yOffset >= -.001f) {
+						fireScript.mainCam.transform.position = new Vector3 (newX, projectile.position.y - yOffset, fireScript.mainCam.transform.position.z);
+					}
+				}
                 else
                 {
                     i++;
