@@ -102,10 +102,11 @@ public class LaunchArcRenderer : MonoBehaviour {
             {
 				if (projectile.localPosition != temp[i] && projectile.gameObject.activeSelf == true)
                 {
-
+                    //Debug.Log("Moving");
                     projectile.localPosition = Vector3.MoveTowards(projectile.localPosition, temp[i], step);
+                    
 
-					if (Mathf.Abs(projectile.position.x - fireScript.mainCam.transform.position.x) <= .5f /*projectile.position.x - xOffset >= -9f && projectile.position.x - xOffset <= 9f*/) {
+                    if (Mathf.Abs(projectile.position.x - fireScript.mainCam.transform.position.x) <= .5f /*projectile.position.x - xOffset >= -9f && projectile.position.x - xOffset <= 9f*/) {
 						doFollow = true;
 
 
@@ -122,6 +123,7 @@ public class LaunchArcRenderer : MonoBehaviour {
                 else
                 {
                     i++;
+
                 }
             }
             else
@@ -158,7 +160,7 @@ public class LaunchArcRenderer : MonoBehaviour {
     {
         projectile.gameObject.SetActive(false);
         GameObject clone = Instantiate(groundSplatter, projectile.position, Quaternion.identity) as GameObject;
-        clone.transform.position = new Vector3(clone.transform.position.x + 1.5f, clone.transform.position.y - 1f, clone.transform.position.z);
+        clone.transform.position = new Vector3(clone.transform.position.x, clone.transform.position.y - 1f, clone.transform.position.z);
         clone.transform.Rotate(Vector3.forward * Random.Range(1, 180));
         //blue
         if (currentPlayer == 1)
