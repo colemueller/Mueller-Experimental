@@ -103,7 +103,8 @@ public class LaunchArcRenderer : MonoBehaviour {
 				if (projectile.localPosition != temp[i] && projectile.gameObject.activeSelf == true)
                 {
                     //Debug.Log("Moving");
-                    projectile.localPosition = Vector3.MoveTowards(projectile.localPosition, temp[i], step);
+					projectile.localPosition = Vector3.MoveTowards(projectile.localPosition, temp[i], step);
+					projectile.LookAt (-(temp [i]));
                     
 
                     if (Mathf.Abs(projectile.position.x - fireScript.mainCam.transform.position.x) <= .5f /*projectile.position.x - xOffset >= -9f && projectile.position.x - xOffset <= 9f*/) {
