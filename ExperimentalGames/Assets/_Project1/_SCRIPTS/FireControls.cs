@@ -23,7 +23,8 @@ public class FireControls : MonoBehaviour {
     public bool DoAnything = true;
     bool isPlayerOne = true;
 
-	public LaunchArcRenderer arcRenderScript;
+	public Animator p1_anim;
+    public Animator p2_anim;
 
     // Use this for initialization
     void Start () {
@@ -66,6 +67,7 @@ public class FireControls : MonoBehaviour {
                 {
                     canFire_1 = false;
                     Fire(1);
+                    p1_anim.Play("throw");
                     DoAnything = false;
                 }
 
@@ -98,6 +100,7 @@ public class FireControls : MonoBehaviour {
                 {
                     canFire_2 = false;
                     Fire(2);
+                    p2_anim.Play("throw");
                     DoAnything = false;
                 }
 

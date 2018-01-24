@@ -22,6 +22,8 @@ public class LaunchArcRenderer : MonoBehaviour {
     int i = 1;
 
     public FireControls fireScript;
+    public GameObject groundSplatter;
+    float currentPlayer = 1;
 
 	float xOffset;
 	float newX;
@@ -85,6 +87,7 @@ public class LaunchArcRenderer : MonoBehaviour {
 		xOffset = projectile.position.x - fireScript.mainCam.transform.position.x;
 		yOffset = projectile.position.y - fireScript.mainCam.transform.position.y;
         projectile.gameObject.SetActive(true);
+        currentPlayer = player;
 
     }
 
@@ -117,11 +120,53 @@ public class LaunchArcRenderer : MonoBehaviour {
             {
                 doMove = false;
                 i = 1;
-                projectile.gameObject.SetActive(false);
+                if (projectile.gameObject.activeSelf == true)
+                {
+                    Debug.Log("Do Ground Splat");
+                    projectile.gameObject.SetActive(false);
+                    SplatGround();
+                }
+                
                 fireScript.SwitchPlayer();
             }
         }
     }
+
+    private void SplatGround()
+    {
+        projectile.gameObject.SetActive(false);
+        GameObject clone = Instantiate(groundSplatter, projectile.position, Quaternion.identity) as GameObject;
+        clone.transform.position = new Vector3(clone.transform.position.x + 1.5f, clone.transform.position.y - 1f, clone.transform.position.z);
+        clone.transform.Rotate(Vector3.forward * Random.Range(1, 180));
+        //blue
+        if (currentPlayer == 1)
+        {
+            clone.GetComponent<SpriteRenderer>().color = new Color32(66, 93, 140, 255);
+            
+        }
+        //red
+        else
+        {
+            clone.GetComponent<SpriteRenderer>().color = new Color32(137, 46, 47, 255);
+        }
+    }
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    projectile.gameObject.SetActive(false);
+    //    GameObject clone = Instantiate(groundSplatter, projectile.position, Quaternion.identity) as GameObject;
+
+    //    //blue
+    //    if (currentPlayer == 1)
+    //    {
+    //        clone.GetComponent<SpriteRenderer>().color = new Color32(66,93,140,255);
+    //    }
+    //    //red
+    //    else
+    //    {
+    //        clone.GetComponent<SpriteRenderer>().color = new Color32(137, 46, 47, 255);
+    //    }
+    //}
 
 
 
