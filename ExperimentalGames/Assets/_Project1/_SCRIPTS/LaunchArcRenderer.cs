@@ -28,6 +28,7 @@ public class LaunchArcRenderer : MonoBehaviour {
 	float xOffset;
 	float newX;
 	float yOffset;
+	bool doFollow;
 
     float radianAngle;  //For converting degrees to radians
 
@@ -99,17 +100,24 @@ public class LaunchArcRenderer : MonoBehaviour {
 
             if (i <= resolution)
             {
-                if (projectile.localPosition != temp[i])
+				if (projectile.localPosition != temp[i] && projectile.gameObject.activeSelf == true)
                 {
+
                     projectile.localPosition = Vector3.MoveTowards(projectile.localPosition, temp[i], step);
 
-					if (projectile.position.x - xOffset >= -9f && projectile.position.x - xOffset <= 9f) {
-						newX = projectile.position.x - xOffset;
-						fireScript.mainCam.transform.position = new Vector3 (newX, fireScript.mainCam.transform.position.y, fireScript.mainCam.transform.position.z);
+					if (Mathf.Abs(projectile.position.x - fireScript.mainCam.transform.position.x) <= .5f /*projectile.position.x - xOffset >= -9f && projectile.position.x - xOffset <= 9f*/) {
+						doFollow = true;
+
+
 					}
+					if (projectile.position.x >= 20f || projectile.position.x <= -20f) {
+						StartCoroutine (delay ());
+					}
+					/*
 					if (projectile.position.y - yOffset >= -.001f) {
 						fireScript.mainCam.transform.position = new Vector3 (newX, projectile.position.y - yOffset, fireScript.mainCam.transform.position.z);
 					}
+					*/
 				}
                 else
                 {
@@ -126,11 +134,25 @@ public class LaunchArcRenderer : MonoBehaviour {
                     projectile.gameObject.SetActive(false);
                     SplatGround();
                 }
+
+				//Delay camera move and player switch for some second(s)
+				StartCoroutine(delay ());
                 
-                fireScript.SwitchPlayer();
             }
         }
+		newX = projectile.position.x;
+		if (doFollow) {
+			if (projectile.position.x >= -9f && projectile.position.x <= 9f) {
+				fireScript.mainCam.transform.position = new Vector3 (newX, fireScript.mainCam.transform.position.y, fireScript.mainCam.transform.position.z);
+			}
+		}
     }
+
+	IEnumerator delay() {
+		doFollow = false;
+		yield return new WaitForSeconds (1);
+		fireScript.SwitchPlayer();
+	}
 
     private void SplatGround()
     {
