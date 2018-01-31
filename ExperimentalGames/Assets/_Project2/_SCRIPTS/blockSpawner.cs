@@ -13,7 +13,8 @@ public class blockSpawner : MonoBehaviour {
 
 	public Transform spawnPad;
 
-	private GameObject[] objList;
+	public GameObject[] objList;
+	public bool spawnNew = false;
 
 	// Use this for initialization
 	void Start () {
@@ -29,9 +30,19 @@ public class blockSpawner : MonoBehaviour {
 		GameObject clone = Instantiate(objList[rand], new Vector3(spawnPad.position.x, spawnPad.position.y + 1, spawnPad.position.z), Quaternion.identity) as GameObject;
 
 	}
-	
+
+	public void spawnNewBlock() {
+		int rand = Random.Range (0, 5);
+		GameObject clone = Instantiate(objList[rand], new Vector3(spawnPad.position.x, spawnPad.position.y + 1, spawnPad.position.z), Quaternion.identity) as GameObject;
+	}
+
 	// Update is called once per frame
 	void Update () {
+		/*
+		if (spawnNew == true) {
+			spawnNewBlock ();
+			spawnNew = false;
+		}*/
 		
 	}
 }

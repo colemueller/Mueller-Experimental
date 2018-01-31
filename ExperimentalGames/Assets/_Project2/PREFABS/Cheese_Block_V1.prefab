@@ -24,9 +24,10 @@ GameObject:
   - component: {fileID: 95100350722694194}
   - component: {fileID: 54306765923971580}
   - component: {fileID: 65619528685964616}
+  - component: {fileID: 114177925512545286}
   m_Layer: 0
   m_Name: Cheese_Block_V1
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,3 +128,16 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114177925512545286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1818548930699210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889c89efebaf127428e59d50cd53c54d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundPlane: {fileID: 0}
+  bs: {fileID: 0}

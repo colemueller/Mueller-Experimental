@@ -539,9 +539,10 @@ GameObject:
   - component: {fileID: 95528695255729890}
   - component: {fileID: 54738446319229744}
   - component: {fileID: 65926984520672094}
+  - component: {fileID: 114369118072494310}
   m_Layer: 0
   m_Name: Crate
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5433,3 +5434,16 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114369118072494310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1408329703881398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889c89efebaf127428e59d50cd53c54d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundPlane: {fileID: 0}
+  bs: {fileID: 0}
