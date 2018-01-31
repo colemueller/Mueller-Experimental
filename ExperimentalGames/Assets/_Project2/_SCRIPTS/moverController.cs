@@ -16,13 +16,15 @@ public class moverController : MonoBehaviour {
 	void Update () {
 		if (Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.RightArrow)) {
 			if (crane.transform.localPosition.x < 13.5f) {
-				crane.transform.position = new Vector3 (crane.transform.position.x + moveSpeed, crane.transform.position.y, crane.transform.position.z);
+                //crane.transform.position = new Vector3 (crane.transform.position.x + moveSpeed, crane.transform.position.y, crane.transform.position.z);
+                crane.transform.Translate(Vector3.right * (moveSpeed * Time.deltaTime));
 			}
 		} 
 		if (Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.LeftArrow)) {
 			if (crane.transform.localPosition.x > -1f) {
-				crane.transform.position = new Vector3 (crane.transform.position.x - moveSpeed, crane.transform.position.y, crane.transform.position.z);
-			}
+                //crane.transform.position = new Vector3 (crane.transform.position.x - moveSpeed, crane.transform.position.y, crane.transform.position.z);
+                crane.transform.Translate(Vector3.left * (moveSpeed * Time.deltaTime));
+            }
 		}
 	}
 }

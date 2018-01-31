@@ -4,24 +4,43 @@ using UnityEngine;
 
 public class spawnNewBlockManager : MonoBehaviour {
 
-	public GameObject groundPlane;
+	
 
 	public blockSpawner bs;
-
+    public Rigidbody MyRigidBody;
+    bool CheckVel = false;
 	// Use this for initialization
 	void Start () {
-		groundPlane = GameObject.FindGameObjectWithTag ("ground");
-		bs = GameObject.FindGameObjectWithTag ("spawnPlane").GetComponent<blockSpawner> ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
 		
+		bs = GameObject.FindGameObjectWithTag ("spawnPlane").GetComponent<blockSpawner> ();
+        MyRigidBody = this.GetComponent<Rigidbody>();
 	}
 
-	void OnCollisionEnter (Collision col) {
-		if (col.gameObject.tag == "block") {
-			bs.spawnNewBlock ();
-		}
+    private void Update()
+    {
+        //Debug.Log(MyRigidBody.velocity);
+        if (CheckVel)
+        {
+            if (MyRigidBody.velocity == new Vector3(0, 0, 0))
+            {
+                bs.spawnNewBlock();
+                CheckVel = false;
+                this.tag = "BlockStatic";
+                this.GetComponent<spawnNewBlockManager>().enabled = false;
+            }
+        }
+    }
+
+    void OnCollisionEnter (Collision col) {
+
+		if (col.gameObject.tag == "BlockStatic" || col.gameObject.tag == "ground")
+        {
+            //if (MyRigidBody.velocity == new Vector3(0,0,0))
+            //{
+            //    bs.spawnNewBlock();
+            //}
+            //Debug.Log(MyRigidBody.velocity);
+            CheckVel = true;
+        }
 	}
 }

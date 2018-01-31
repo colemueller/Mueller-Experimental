@@ -16,6 +16,8 @@ public class blockSpawner : MonoBehaviour {
 	public GameObject[] objList;
 	public bool spawnNew = false;
 
+    public Collider hookCol;
+
 	// Use this for initialization
 	void Start () {
 		objList = new GameObject[6];
@@ -34,6 +36,7 @@ public class blockSpawner : MonoBehaviour {
 	public void spawnNewBlock() {
 		int rand = Random.Range (0, 5);
 		GameObject clone = Instantiate(objList[rand], new Vector3(spawnPad.position.x, spawnPad.position.y + 1, spawnPad.position.z), Quaternion.identity) as GameObject;
+        hookCol.enabled = true;
 	}
 
 	// Update is called once per frame

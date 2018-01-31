@@ -12,18 +12,23 @@ public class grabbingController : MonoBehaviour {
 	private GameObject heldObj;
 	private HingeJoint hj;
 
+    
 	// Use this for initialization
 	void Start () {
 		holding = false;
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space) && holding == true) {
+		if (Input.GetKeyDown (KeyCode.Space) && holding==true) {
+            //Debug.Log("LET GO BITCH");
+            
 			Destroy (hj);
-			Rigidbody rbody = heldObj.GetComponent<Rigidbody> ();
-			rbody.detectCollisions = true;
-			rbody.mass = releaseMass;
+            craneHookCol.enabled = false;
+			//Rigidbody rbody = heldObj.GetComponent<Rigidbody> ();
+			//rbody.detectCollisions = true;
+			//rbody.mass = releaseMass;
 
 			holding = false;
 		}
@@ -34,10 +39,10 @@ public class grabbingController : MonoBehaviour {
 
 			hj = gameObject.AddComponent<HingeJoint>();
 			hj.connectedBody = col.rigidbody;
-			col.rigidbody.mass = .0001f;
-			col.rigidbody.freezeRotation = true;
-			col.rigidbody.velocity = new Vector3 (0,0,0);
-			col.rigidbody.detectCollisions = false;
+			//col.rigidbody.mass = .0001f;
+			//col.rigidbody.freezeRotation = true;
+			//col.rigidbody.velocity = new Vector3 (0,0,0);
+			//col.rigidbody.detectCollisions = false;
 
 			heldObj = col.gameObject;
 			holding = true;
