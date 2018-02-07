@@ -59,6 +59,12 @@ public class grabbingController : MonoBehaviour {
 		if (col.gameObject.tag == "block" && GetComponent<HingeJoint>() == null) {
 
 			hj = gameObject.AddComponent<HingeJoint>();
+            
+            hj.anchor = new Vector3(0, -0.5f, 0);
+            hj.useSpring = true;
+            JointSpring j_spring = new JointSpring();
+            j_spring.spring = 100;
+            hj.spring = j_spring;
 			hj.connectedBody = col.rigidbody;
 			//col.rigidbody.mass = .0001f;
 			//col.rigidbody.freezeRotation = true;

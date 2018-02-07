@@ -11,9 +11,13 @@ public class spawnNewBlockManager : MonoBehaviour {
     public Rigidbody MyRigidBody;
     bool CheckVel = false;
 	private GameObject currentlyHeld;
-	// Use this for initialization
-	void Start () {
-		
+    private ParticleSystem particleSys;
+    ParticleSystem.EmissionModule mod;
+    // Use this for initialization
+    void Start () {
+        particleSys = this.GetComponent<ParticleSystem>();
+        mod = particleSys.emission;
+        mod.enabled = false;
 		bs = GameObject.FindGameObjectWithTag ("spawnPlane").GetComponent<blockSpawner> ();
         MyRigidBody = this.GetComponent<Rigidbody>();
 		//trackerText = GameObject.FindGameObjectWithTag ("trackerText").GetComponent<Text> ();
@@ -46,8 +50,11 @@ public class spawnNewBlockManager : MonoBehaviour {
             //    bs.spawnNewBlock();
             //}
             //Debug.Log(MyRigidBody.velocity);
+            mod.enabled = true;
+            particleSys.Play();
             CheckVel = true;
 			currentlyHeld = MyRigidBody.gameObject;
         }
+        
 	}
 }
