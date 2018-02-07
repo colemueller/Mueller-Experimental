@@ -9,6 +9,7 @@ TagManager:
   - ground
   - spawnPlane
   - BlockStatic
+  - trackerText
   layers:
   - Default
   - TransparentFX

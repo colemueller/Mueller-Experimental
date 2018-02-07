@@ -5445,5 +5445,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889c89efebaf127428e59d50cd53c54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundPlane: {fileID: 0}
+  trackerText: {fileID: 0}
   bs: {fileID: 0}
+  MyRigidBody: {fileID: 0}

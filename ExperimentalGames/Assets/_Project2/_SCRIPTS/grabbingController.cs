@@ -1,41 +1,62 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class grabbingController : MonoBehaviour {
 
 	public GameObject craneHook;
 	public Collider craneHookCol;
 	public float releaseMass;
+	public GameObject spawnPlatform;
+
+	public Camera cam;
 
 	private bool holding;
 	private GameObject heldObj;
 	private HingeJoint hj;
+	private Rigidbody myRB;
+	private bool tracking;
+	private Vector3 camDefaultPos;
 
+	public Text trackerText;
     
 	// Use this for initialization
 	void Start () {
 		holding = false;
-        
+		camDefaultPos = cam.transform.position;
+		//trackerText = GameObject.FindGameObjectWithTag ("trackerText").GetComponent<Text> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space) && holding==true) {
-            //Debug.Log("LET GO BITCH");
+		if (Input.GetKeyDown (KeyCode.Space) && holding == true) {
             
+			heldObj.tag = "BlockStatic";
 			Destroy (hj);
-            craneHookCol.enabled = false;
+			craneHookCol.enabled = false;
 			//Rigidbody rbody = heldObj.GetComponent<Rigidbody> ();
 			//rbody.detectCollisions = true;
 			//rbody.mass = releaseMass;
 
 			holding = false;
+			tracking = true;
+		}
+
+		if (myRB.velocity != new Vector3 (0, 0, 0) && tracking == true) {
+			trackerText.text = Mathf.Abs((Mathf.Ceil (heldObj.transform.position.x))+(Mathf.Ceil (heldObj.transform.position.z))).ToString () + "m";
+			Vector3 moveTo = new Vector3 (heldObj.transform.position.x, heldObj.transform.position.y + 3f, cam.transform.position.z);
+			cam.transform.position = Vector3.MoveTowards(cam.transform.position, moveTo, .5f);
+		} else {
+			tracking = false;
+
+			Vector3 moveTo = new Vector3 (heldObj.transform.position.x, heldObj.transform.position.y + 3f, cam.transform.position.z);
+			cam.transform.position = Vector3.MoveTowards(cam.transform.position, camDefaultPos, .5f);
 		}
 	}
 
 	void OnCollisionEnter (Collision col) {
-		if (col.gameObject.tag == "block") {
+		if (col.gameObject.tag == "block" && GetComponent<HingeJoint>() == null) {
 
 			hj = gameObject.AddComponent<HingeJoint>();
 			hj.connectedBody = col.rigidbody;
@@ -45,7 +66,11 @@ public class grabbingController : MonoBehaviour {
 			//col.rigidbody.detectCollisions = false;
 
 			heldObj = col.gameObject;
+			myRB = col.rigidbody;
+			Collider spawnCol = spawnPlatform.GetComponent<Collider>();
+			spawnCol.enabled = false;
 			holding = true;
+
 		}
 	}
 }
