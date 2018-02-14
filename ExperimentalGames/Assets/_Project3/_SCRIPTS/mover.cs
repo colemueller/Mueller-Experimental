@@ -7,19 +7,36 @@ public class mover : MonoBehaviour {
 	public GameObject leftLeg;
 	public GameObject rightLeg;
 	public float speed;
+	public float speedRamp;
+	public float forwardInterval;
 
 	private int screenSizeX;
+	private float camStartY;
+	private float camStartX;
 	private bool movingLeft;
 	private bool prevDirection;
 	private bool fell;
+	private bool forwardMove;
+	private float startingSpeed;
 
 	// Use this for initialization
 	void Start () {
 		screenSizeX = Screen.width;
 		fell = false;
+		camStartY = this.transform.position.y;
+		camStartX = this.transform.position.x;
+		forwardMove = false;
+		startingSpeed = speed;
 
 	}
-	
+
+	void reset() {
+		this.transform.position = new Vector3 (camStartX, camStartY, this.transform.position.z);
+		this.transform.rotation = new Quaternion (0, 0, 0, 1);
+		fell = false;
+		speed = startingSpeed;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		//Find the middle of current screen size
@@ -38,6 +55,10 @@ public class mover : MonoBehaviour {
 					fell = true;
 					speed = 0;
 				}
+				if (forwardMove) {
+					this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z + forwardInterval);
+					forwardMove = false;
+				}
 				this.transform.RotateAround (leftLeg.transform.position, Vector3.forward, speed);
 			}
 		
@@ -54,6 +75,10 @@ public class mover : MonoBehaviour {
 					fell = true;
 					speed = 0;
 				}
+				if (forwardMove) {
+					this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z + forwardInterval);
+					forwardMove = false;
+				}
 				this.transform.RotateAround (rightLeg.transform.position, (Vector3.forward * -1), speed);
 			}
 
@@ -63,11 +88,16 @@ public class mover : MonoBehaviour {
 		if (!fell) {
 			//Add to speed everytime you change directions
 			if (prevDirection != movingLeft) {
-				speed += .25f;
+				speed += speedRamp;
+
+				forwardMove = true;
 				prevDirection = movingLeft;
 			}
+		} else {
+			if (Input.GetKey (KeyCode.Space) && fell == true) {
+				reset ();
+			}
 		}
-		
 		
 	}
 }
