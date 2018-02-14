@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class mover : MonoBehaviour {
 
+    public GameObject cam;
+    public Material vignette;
 	public GameObject leftLeg;
 	public GameObject rightLeg;
 	public float speed;
@@ -18,6 +20,7 @@ public class mover : MonoBehaviour {
 	private bool fell;
 	private bool forwardMove;
 	private float startingSpeed;
+    private bool addCrack = true;
 
 	// Use this for initialization
 	void Start () {
@@ -28,7 +31,9 @@ public class mover : MonoBehaviour {
 		forwardMove = false;
 		startingSpeed = speed;
 
-	}
+        vignette.SetFloat("_VigIntensity", 0);
+
+    }
 
 	void reset() {
 		this.transform.position = new Vector3 (camStartX, camStartY, this.transform.position.z);
@@ -56,7 +61,7 @@ public class mover : MonoBehaviour {
 					speed = 0;
 				}
 				if (forwardMove) {
-					this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z + forwardInterval);
+					this.transform.position = new Vector3 (this.transform.position.x, camStartY, this.transform.position.z + forwardInterval);
 					forwardMove = false;
 				}
 				this.transform.RotateAround (leftLeg.transform.position, Vector3.forward, speed);
@@ -76,7 +81,7 @@ public class mover : MonoBehaviour {
 					speed = 0;
 				}
 				if (forwardMove) {
-					this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z + forwardInterval);
+					this.transform.position = new Vector3 (this.transform.position.x, camStartY, this.transform.position.z + forwardInterval);
 					forwardMove = false;
 				}
 				this.transform.RotateAround (rightLeg.transform.position, (Vector3.forward * -1), speed);
@@ -94,10 +99,33 @@ public class mover : MonoBehaviour {
 				prevDirection = movingLeft;
 			}
 		} else {
+            if (addCrack)
+            {
+                AddCrack();
+                addCrack = false;
+            }
 			if (Input.GetKey (KeyCode.Space) && fell == true) {
 				reset ();
+                addCrack = true;
 			}
 		}
 		
 	}
+
+    public void AddCrack()
+    {
+        float f = vignette.GetFloat("_VigIntensity");
+        vignette.SetFloat("_VigIntensity", (f + 0.5f));
+        cam.AddComponent<camTex2>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.CompareTag("obstacle"))
+        {
+            Debug.Log("Collide");
+            AddCrack();
+        }
+    }
 }

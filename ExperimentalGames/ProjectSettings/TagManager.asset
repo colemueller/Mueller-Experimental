@@ -10,6 +10,7 @@ TagManager:
   - spawnPlane
   - BlockStatic
   - trackerText
+  - obstacle
   layers:
   - Default
   - TransparentFX
