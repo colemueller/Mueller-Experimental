@@ -5,10 +5,12 @@
 		_MainTex ("Texture", 2D) = "white" {}
 		_VigTex ("Vignette Texture", 2D) = "white" {}
 		_Color ("Tint Color", Color) = (1,1,1,1)
+		_RandPos("Random Position", float) = 1
 		//_VigColor("Vignette Color", Color) = (1,1,1,1)
 		_ColorIntensity("Color Intensity", float) = 1
 		_VigIntensity("Vignette Intensity", float) = 1
 		_Brightness("Brightness", float) = 1
+
 	}
 
 	SubShader
@@ -24,6 +26,15 @@
 			
 			#include "UnityCG.cginc"
 
+			sampler2D _MainTex;
+			sampler2D _VigTex;
+			fixed4 _Color;
+			fixed4 _RandPos;
+			//fixed4 _VigColor;
+			float _ColorIntensity;
+			float _VigIntensity;
+			float _Brightness;
+			float4 _VigTex_ST;
 
 
 			struct appdata
@@ -43,16 +54,11 @@
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = v.uv;
+				//o.uv = TRANSFORM_TEX (v.uv, _VigTex);
 				return o;
 			}
 			
-			sampler2D _MainTex;
-			sampler2D _VigTex;
-			fixed4 _Color;
-			//fixed4 _VigColor;
-			float _ColorIntensity;
-			float _VigIntensity;
-			float _Brightness;
+			
 
 			fixed4 frag (v2f i) : SV_Target
 			{

@@ -115,7 +115,7 @@ public class mover : MonoBehaviour {
     public void AddCrack()
     {
         float f = vignette.GetFloat("_VigIntensity");
-        vignette.SetFloat("_VigIntensity", (f + 0.5f));
+        vignette.SetFloat("_VigIntensity", (f + 0.3f));
         cam.AddComponent<camTex2>();
     }
 

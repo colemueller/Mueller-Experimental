@@ -13,7 +13,7 @@ public class MoveThis : MonoBehaviour {
 	void Update () {
 
         
-        transform.position = new Vector3(Mathf.Sin(Time.time * moveSpeed) * distance,transform.position.y, transform.position.z);
+        transform.position = new Vector3(Mathf.Sin(Time.time * moveSpeed) * distance, transform.position.y, transform.position.z);
         transform.Rotate(Vector3.right, rotSpeed);
         transform.Rotate(Vector3.forward, rotSpeed);
 
