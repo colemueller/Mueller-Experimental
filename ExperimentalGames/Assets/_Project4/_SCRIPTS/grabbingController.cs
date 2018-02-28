@@ -32,9 +32,9 @@ public class grabbingController : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Space) && holding == true) {
             
-			heldObj.tag = "BlockStatic";
+			//heldObj.tag = "BlockStatic";
 			Destroy (hj);
-			craneHookCol.enabled = false;
+			//craneHookCol.enabled = false;
 			//Rigidbody rbody = heldObj.GetComponent<Rigidbody> ();
 			//rbody.detectCollisions = true;
 			//rbody.mass = releaseMass;
