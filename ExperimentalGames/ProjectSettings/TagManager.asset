@@ -11,6 +11,7 @@ TagManager:
   - BlockStatic
   - trackerText
   - obstacle
+  - turnObject
   layers:
   - Default
   - TransparentFX
