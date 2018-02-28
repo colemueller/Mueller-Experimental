@@ -7,10 +7,10 @@ public class grabbingController : MonoBehaviour {
 
 	public GameObject craneHook;
 	public Collider craneHookCol;
-	public float releaseMass;
-	public GameObject spawnPlatform;
+	//public float releaseMass;
+	//public GameObject spawnPlatform;
 
-	public Camera cam;
+	//public Camera cam;
 
 	private bool holding;
 	private GameObject heldObj;
@@ -19,12 +19,12 @@ public class grabbingController : MonoBehaviour {
 	private bool tracking;
 	private Vector3 camDefaultPos;
 
-	public Text trackerText;
+	//public Text trackerText;
     
 	// Use this for initialization
 	void Start () {
 		holding = false;
-		camDefaultPos = cam.transform.position;
+		//camDefaultPos = cam.transform.position;
 		//trackerText = GameObject.FindGameObjectWithTag ("trackerText").GetComponent<Text> ();
 	}
 	
@@ -43,16 +43,7 @@ public class grabbingController : MonoBehaviour {
 			tracking = true;
 		}
 
-		if (myRB.velocity != new Vector3 (0, 0, 0) && tracking == true) {
-			trackerText.text = Mathf.Abs((Mathf.Ceil (heldObj.transform.position.x))+(Mathf.Ceil (heldObj.transform.position.z))).ToString () + "m";
-			Vector3 moveTo = new Vector3 (heldObj.transform.position.x, heldObj.transform.position.y + 3f, cam.transform.position.z);
-			cam.transform.position = Vector3.MoveTowards(cam.transform.position, moveTo, .5f);
-		} else {
-			tracking = false;
-
-			Vector3 moveTo = new Vector3 (heldObj.transform.position.x, heldObj.transform.position.y + 3f, cam.transform.position.z);
-			cam.transform.position = Vector3.MoveTowards(cam.transform.position, camDefaultPos, .5f);
-		}
+		
 	}
 
 	void OnCollisionEnter (Collision col) {
@@ -73,8 +64,8 @@ public class grabbingController : MonoBehaviour {
 
 			heldObj = col.gameObject;
 			myRB = col.rigidbody;
-			Collider spawnCol = spawnPlatform.GetComponent<Collider>();
-			spawnCol.enabled = false;
+			//Collider spawnCol = spawnPlatform.GetComponent<Collider>();
+			//spawnCol.enabled = false;
 			holding = true;
 
 		}
