@@ -35,11 +35,19 @@ public class grabbingController : MonoBehaviour {
             
 			//heldObj.tag = "BlockStatic";
 			Destroy (hj);
+<<<<<<< HEAD
 			craneHookCol.enabled = false;
             //Rigidbody rbody = heldObj.GetComponent<Rigidbody> ();
             //rbody.detectCollisions = true;
             //rbody.mass = releaseMass;
             StartCoroutine(HookOn(hookTimer));
+=======
+			//craneHookCol.enabled = false;
+			//Rigidbody rbody = heldObj.GetComponent<Rigidbody> ();
+			//rbody.detectCollisions = true;
+			//rbody.mass = releaseMass;
+
+>>>>>>> develop
 			holding = false;
 			tracking = true;
 		}
