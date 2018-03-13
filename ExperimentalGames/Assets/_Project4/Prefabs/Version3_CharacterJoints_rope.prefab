@@ -711,10 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   craneHook: {fileID: 1309945973777550}
   craneHookCol: {fileID: 135383569155394606}
-  releaseMass: 10
-  spawnPlatform: {fileID: 0}
-  cam: {fileID: 0}
-  trackerText: {fileID: 0}
+  hookTimer: 0.5
 --- !u!135 &135383569155394606
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -792,8 +789,8 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
-    spring: 10
-    damper: 0
+    spring: 500
+    damper: 10
   m_LowTwistLimit:
     limit: 0
     bounciness: 0
@@ -803,7 +800,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
-    spring: 800
+    spring: 900
     damper: 0
   m_Swing1Limit:
     limit: 10
@@ -836,8 +833,8 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
-    spring: 10
-    damper: 0
+    spring: 500
+    damper: 10
   m_LowTwistLimit:
     limit: 0
     bounciness: 0
@@ -847,7 +844,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
-    spring: 800
+    spring: 900
     damper: 0
   m_Swing1Limit:
     limit: 10
@@ -880,8 +877,8 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
-    spring: 10
-    damper: 0
+    spring: 500
+    damper: 10
   m_LowTwistLimit:
     limit: 0
     bounciness: 0
@@ -891,7 +888,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
-    spring: 50
+    spring: 900
     damper: 10
   m_Swing1Limit:
     limit: 10
@@ -924,8 +921,8 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
-    spring: 10
-    damper: 0
+    spring: 500
+    damper: 10
   m_LowTwistLimit:
     limit: 0
     bounciness: 0
@@ -935,7 +932,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
-    spring: 800
+    spring: 900
     damper: 0
   m_Swing1Limit:
     limit: 10
@@ -968,8 +965,8 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
-    spring: 10
-    damper: 0
+    spring: 500
+    damper: 10
   m_LowTwistLimit:
     limit: 0
     bounciness: 0
@@ -979,7 +976,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
-    spring: 800
+    spring: 900
     damper: 0
   m_Swing1Limit:
     limit: 10
@@ -1012,8 +1009,8 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
-    spring: 10
-    damper: 0
+    spring: 500
+    damper: 10
   m_LowTwistLimit:
     limit: 0
     bounciness: 0
@@ -1023,7 +1020,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
-    spring: 800
+    spring: 900
     damper: 0
   m_Swing1Limit:
     limit: 10
@@ -1056,8 +1053,8 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
-    spring: 10
-    damper: 0
+    spring: 500
+    damper: 10
   m_LowTwistLimit:
     limit: 0
     bounciness: 0
@@ -1067,7 +1064,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
-    spring: 800
+    spring: 900
     damper: 0
   m_Swing1Limit:
     limit: 10
@@ -1100,8 +1097,8 @@ CharacterJoint:
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
-    spring: 10
-    damper: 0
+    spring: 500
+    damper: 10
   m_LowTwistLimit:
     limit: 0
     bounciness: 0
@@ -1111,7 +1108,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
-    spring: 800
+    spring: 900
     damper: 0
   m_Swing1Limit:
     limit: 10

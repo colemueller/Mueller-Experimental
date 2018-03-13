@@ -15,6 +15,8 @@ public class grabbingController : MonoBehaviour {
 	private bool holding;
 	private GameObject heldObj;
 	private HingeJoint hj;
+    //private CharacterJoint cj;
+    
 	private Rigidbody myRB;
 	private bool tracking;
 	private Vector3 camDefaultPos;
@@ -32,22 +34,14 @@ public class grabbingController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Space) && holding == true) {
-            
+            Debug.Log("RELEASE");
 			//heldObj.tag = "BlockStatic";
-			Destroy (hj);
-<<<<<<< HEAD
+			Destroy(hj);
+           
 			craneHookCol.enabled = false;
-            //Rigidbody rbody = heldObj.GetComponent<Rigidbody> ();
-            //rbody.detectCollisions = true;
-            //rbody.mass = releaseMass;
+            
             StartCoroutine(HookOn(hookTimer));
-=======
-			//craneHookCol.enabled = false;
-			//Rigidbody rbody = heldObj.GetComponent<Rigidbody> ();
-			//rbody.detectCollisions = true;
-			//rbody.mass = releaseMass;
 
->>>>>>> develop
 			holding = false;
 			tracking = true;
 		}
@@ -65,17 +59,19 @@ public class grabbingController : MonoBehaviour {
 		if (col.gameObject.tag == "block" && GetComponent<HingeJoint>() == null) {
 
 			hj = gameObject.AddComponent<HingeJoint>();
-            
-            hj.anchor = new Vector3(0, -0.5f, 0);
+
+            hj.anchor = new Vector3(0.09f, -0.44f, 0);
             hj.useSpring = true;
+            
             JointSpring j_spring = new JointSpring();
-            j_spring.spring = 100;
-            hj.spring = j_spring;
-			hj.connectedBody = col.rigidbody;
-			//col.rigidbody.mass = .0001f;
-			//col.rigidbody.freezeRotation = true;
-			//col.rigidbody.velocity = new Vector3 (0,0,0);
-			//col.rigidbody.detectCollisions = false;
+            j_spring.spring = 500;
+           
+            hj.spring= j_spring;
+            //fj.twistLimitSpring = j_spring;
+            //j_spring.spring = 900;
+            //cj.swingLimitSpring = j_spring;
+            hj.connectedBody = col.rigidbody;
+			
 
 			heldObj = col.gameObject;
 			myRB = col.rigidbody;
