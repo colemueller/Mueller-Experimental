@@ -28,7 +28,7 @@ public class BotBehavior : MonoBehaviour {
 
             if (Physics.Raycast(myPosition, rayDirection, out hitInfo, rayLength))
             {
-                if (hitInfo.collider.gameObject.tag == "turnObject")
+                if (hitInfo.collider.gameObject.tag == "turnObject" || hitInfo.collider.gameObject.tag == "turnBlock")
                 {
                     targetRotation = Quaternion.LookRotation(-transform.forward, Vector3.up);
                     DoTurn = true;
@@ -44,9 +44,10 @@ public class BotBehavior : MonoBehaviour {
         }
         else
         {
-            
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, (turnSpeed * Time.deltaTime));
-           
+
+            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, (turnSpeed * Time.deltaTime));
+
+            transform.rotation = targetRotation;
             if(transform.rotation == targetRotation)
             {
                 DoTurn = false;

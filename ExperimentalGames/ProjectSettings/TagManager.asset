@@ -12,6 +12,9 @@ TagManager:
   - trackerText
   - obstacle
   - turnObject
+  - turnBlock
+  - rope
+  - bot
   layers:
   - Default
   - TransparentFX
@@ -21,8 +24,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - rope
+  - player
   - 
   - 
   - 

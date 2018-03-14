@@ -20,7 +20,9 @@ public class grabbingController : MonoBehaviour {
 	private Rigidbody myRB;
 	private bool tracking;
 	private Vector3 camDefaultPos;
-    public float hookTimer = 0.5f;
+    public float hookTimer = 3f;
+    GameObject switchTagBack;
+    string tagToSet;
 
 	//public Text trackerText;
     
@@ -35,11 +37,13 @@ public class grabbingController : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Space) && holding == true) {
             Debug.Log("RELEASE");
-			//heldObj.tag = "BlockStatic";
-			Destroy(hj);
-           
-			craneHookCol.enabled = false;
+            tagToSet = heldObj.tag;
+			heldObj.tag = "BlockStatic";
             
+			Destroy(hj);
+            switchTagBack = heldObj;
+            //craneHookCol.enabled = false;
+
             StartCoroutine(HookOn(hookTimer));
 
 			holding = false;
@@ -52,11 +56,12 @@ public class grabbingController : MonoBehaviour {
     IEnumerator HookOn(float time)
     {
         yield return new WaitForSeconds(time);
-        craneHookCol.enabled = true;
+        //craneHookCol.enabled = true;
+        switchTagBack.tag = tagToSet;
     }
 
 	void OnCollisionEnter (Collision col) {
-		if (col.gameObject.tag == "block" && GetComponent<HingeJoint>() == null) {
+		if ((col.gameObject.tag == "block"  || col.gameObject.tag == "turnBlock") && GetComponent<HingeJoint>() == null) {
 
 			hj = gameObject.AddComponent<HingeJoint>();
 
